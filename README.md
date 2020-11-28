@@ -1,3 +1,41 @@
+# INTRODUCTION & SETUP
+
+This Application is based on <a href="https://api-platform.com">API Platform</a>
+
+-----
+
+## Setup:
+ - clone repository
+ - on Mac, run docker desktop
+ - on shell execute:
+ ```
+ docker-compose pull
+ docker-compose up -d
+ ```
+
+## Logs: 
+ to display logs use
+ ```
+ docker-compose logs -f
+ ```
+
+## API
+
+https://localhost/admin
+
+-----
+
+
+
+
+
+
+
+
+-----
+
+# ORYGINAL INFORMATION ABOUT API-PLATFORM
+
 <h1 align="center"><a href="https://api-platform.com"><img src="https://api-platform.com/logo-250x250.png" alt="API Platform"></a></h1>
 
 API Platform is a next-generation web framework designed to easily create API-first projects without compromising extensibility

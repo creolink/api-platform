@@ -5,6 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Ramsey\Uuid\Doctrine\UuidGenerator;
+use Ramsey\Uuid\Uuid;
 
 /**
  * This is a dummy entity. Remove it!
@@ -15,11 +17,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Greeting
 {
     /**
-     * @var int The entity Id
+     * @var Uuid The entity Id
      *
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\CustomIdGenerator(class=UuidGenerator::class)
      */
     private $id;
 
@@ -29,9 +32,9 @@ class Greeting
      * @ORM\Column
      * @Assert\NotBlank
      */
-    public $name = '';
+    public string $name = '';
 
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }
