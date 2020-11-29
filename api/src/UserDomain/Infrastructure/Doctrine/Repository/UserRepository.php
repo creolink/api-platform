@@ -1,13 +1,17 @@
 <?php
 
-namespace App\Repository;
+namespace App\UserDomain\Infrastructure\Doctrine\Repository;
 
-use App\Entity\User;
+use App\UserDomain\Infrastructure\Doctrine\Entity\User;
+use App\UserDomain\Exception\UserNotCreatedException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,14 +21,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    private UserPasswordEncoderInterface $encoder;
+
+    public function __construct(ManagerRegistry $registry, UserPasswordEncoderInterface $encoder)
     {
         parent::__construct($registry, User::class);
+
+        $this->encoder = $encoder;
     }
 
-    /**
-     * Used to upgrade (rehash) the user's password automatically over time.
-     */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
         if (!$user instanceof User) {
@@ -32,8 +37,28 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         $user->setPassword($newEncodedPassword);
-        $this->_em->persist($user);
-        $this->_em->flush();
+
+        $this->save($user);
+    }
+
+    public function createNewUser(UserInterface $user): UserInterface
+    {
+        $this->save($user);
+
+        return $user;
+    }
+
+    /**
+     * @throws UserNotCreatedException
+     */
+    private function save(UserInterface $user): void
+    {
+        try {
+            $this->_em->persist($user);
+            $this->_em->flush();
+        } catch (ORMException | OptimisticLockException $e) {
+            throw new UserNotCreatedException();
+        }
     }
 
     // /**
