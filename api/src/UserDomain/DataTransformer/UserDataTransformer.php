@@ -3,13 +3,13 @@
 namespace App\UserDomain\DataTransformer;
 
 use ApiPlatform\Core\DataTransformer\DataTransformerInterface;
-use App\UserDomain\Infrastructure\Doctrine\Entity\User;
+use App\MealDomain\Adapter\User;
 
 class UserDataTransformer implements DataTransformerInterface
 {
     public function transform($data, string $to, array $context = [])
     {
-        $user = new User();
+        $user = new UserAdapter();
         //$user->isbn = $data->isbn;
         return $user;
     }
@@ -19,7 +19,7 @@ class UserDataTransformer implements DataTransformerInterface
      */
     public function supportsTransformation($data, string $to, array $context = []): bool
     {
-        if ($data instanceof User) {
+        if ($data instanceof UserAdapter) {
             return false;
         }
 

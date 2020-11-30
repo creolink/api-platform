@@ -3,8 +3,10 @@ api_platform:
     version: 1.0.0
     mapping:
         paths: 
-            - '%kernel.project_dir%/src/Entity'
-            - '%kernel.project_dir%/src/Dto'
+            - '%kernel.project_dir%/src/Infrastructure/Doctrine/MealDomain/Entity'
+            - '%kernel.project_dir%/src/Infrastructure/Doctrine/UserDomain/Entity'
+            - '%kernel.project_dir%/src/MealDomain/Dto'
+            - '%kernel.project_dir%/src/UserDomain/Dto'
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:

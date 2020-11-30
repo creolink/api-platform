@@ -19,7 +19,7 @@ class RegisterUserController
 
     public function __invoke(NewUser $data): NewUser
     {
-        $user = $this->userRegistrantHandler->handle($data);
+        $this->userRegistrantHandler->handle($data);
 
 //        try {
 //            $user = $this->userRepository->createNewUser($user);

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200828181711 extends AbstractMigration
+final class Version20200828181712 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20200828181711 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE TABLE meal (id VARCHAR(36) NOT NULL, title VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, calories INTEGER(4) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE meal (id VARCHAR(36) NOT NULL, title VARCHAR(255) NOT NULL, type VARCHAR(255) NOT NULL, calories INTEGER NOT NULL, PRIMARY KEY(id))');
     }
 
     public function down(Schema $schema) : void

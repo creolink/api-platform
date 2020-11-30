@@ -1,6 +1,6 @@
 <?php
 
-namespace App\MealDomain\Infrastructure\Doctrine\Entity;
+namespace App\Infrastructure\Doctrine\MealDomain\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;

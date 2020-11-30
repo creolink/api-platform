@@ -1,19 +1,20 @@
 <?php
 
-namespace App\UserDomain\Infrastructure\Doctrine\Entity;
+namespace App\Infrastructure\Doctrine\UserDomain\Entity;
 
-use App\UserDomain\Infrastructure\Doctrine\Repository\UserRepository;
+use App\Infrastructure\Doctrine\UserDomain\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\MealDomain\Adapter\UserAdapter;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
-class User implements UserInterface
+class User implements UserInterface, UserAdapter
 {
     /**
      * @ORM\Id

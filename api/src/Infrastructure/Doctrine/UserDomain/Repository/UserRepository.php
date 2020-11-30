@@ -1,8 +1,8 @@
 <?php
 
-namespace App\UserDomain\Infrastructure\Doctrine\Repository;
+namespace App\Infrastructure\Doctrine\UserDomain\Repository;
 
-use App\UserDomain\Infrastructure\Doctrine\Entity\User;
+use App\MealDomain\Adapter\User;
 use App\UserDomain\Exception\UserNotCreatedException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -25,7 +25,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function __construct(ManagerRegistry $registry, UserPasswordEncoderInterface $encoder)
     {
-        parent::__construct($registry, User::class);
+        parent::__construct($registry, UserAdapter::class);
 
         $this->encoder = $encoder;
     }

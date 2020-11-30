@@ -1,9 +1,11 @@
 <?php
 
-namespace App\MealDomain\Infrastructure\Doctrine\Entity;
+namespace App\Infrastructure\Doctrine\MealDomain\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Infrastructure\Doctrine\UserDomain\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Ramsey\Uuid\Uuid;
